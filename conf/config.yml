@@ -1,0 +1,28 @@
+service:
+  #服务端口
+  port: 8080
+  #服务节点ID
+  server_id: 1
+  #日志服务配置
+  log:
+    #日志名称
+    name: gocron.log
+    #日志路径存放路径相对bin目录
+    path: ./logs/
+mysql:
+  #数据库IP
+  host: 192.168.33.212
+  #数据库Port
+  port: 3306
+  #数据库用户
+  user: root
+  #数据库密码
+  password: 123456
+  #数据库名称
+  db_name: yptgl
+  #数据库字符集
+  parameters: charset=utf8
+  #连接池最大连接数
+  DB_MAX_OPEN_Contents: 200
+  #连接池最大空闲数
+  DB_MAX_IDLE_Contents: 100
