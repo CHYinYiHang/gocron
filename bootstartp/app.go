@@ -2,6 +2,7 @@ package bootstartp
 
 import (
 	"fmt"
+	"github.com/CHYinYiHang/gocron/pkg/logging"
 	"io/ioutil"
 )
 
@@ -11,5 +12,6 @@ func InitApplication()  {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(string(content))
+	logging.Info(string(content))
+	//fmt.Println(string(content))
 }

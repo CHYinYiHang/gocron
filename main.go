@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/CHYinYiHang/gocron/bootstartp"
 	"time"
 
 	"github.com/CHYinYiHang/gocron/pkg/config"
@@ -14,12 +15,10 @@ import (
 	"net/http"
 )
 
-
-
 func init() {
 	config.LoadConf()
 	logging.LoadLogin()
-	drivers.LoadMysql()
+	//drivers.LoadMysql()
 	utils.LoadSnowflakeNode(config.Config.Server.ServerId)
 }
 
@@ -34,6 +33,8 @@ func main() {
 	defer func() {
 		_ = drivers.MysqlDbPool.Close()
 	}()
+
+	bootstartp.InitApplication()
 
 	//获取gin路由对象 使用默认的gin.Logger(),gin.Recovery() 插件
 	r := gin.Default()
@@ -55,14 +56,16 @@ func main() {
 		MaxHeaderBytes: 1 << 20,          //请求头的最大字节数
 	}
 
-	logging.Info("============服务启动成功============")
+	logging.Info("============服务启动成功 port:" + config.Config.Server.Port + "============")
 	logging.Info("============服务启动加载配置成功============")
 	logging.Info("============服务启动加载数据库连接成============")
 	logging.Info("============服务启动加载日志成功============")
 	logging.Info("============" + time.Now().Format("2006-01-02 15:04:05") + "============")
+
 	//启动服务监听
 	err := s.ListenAndServe()
 	if err != nil {
 		logging.Error("============服务启动监听失败============", err.Error())
+		panic(err)
 	}
 }

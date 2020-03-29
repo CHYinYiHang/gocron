@@ -24,11 +24,22 @@ snowflake ID 的结构是一个 64 bit 的 int 型数据。
 这样保证了：
 所有生成的 ID 按时间趋势递增 （有序）
 整个分布式系统内不会产生重复 ID （唯一）
+
+yiyihang 2020/03/20
+单元测试：大概毫秒可以生成4096个唯一id，1毫秒=100W/ns
+BenchmarkSnowFlake-6     4891089               245 ns/op
+BenchmarkSnowFlake-6     4890499               245 ns/op
+BenchmarkSnowFlake-6     4910473               245 ns/op
+BenchmarkSnowFlake-6     4930611               244 ns/op
+BenchmarkSnowFlake-6     4910408               245 ns/op
 */
 
+//id生成器对象
 var SfNode *snowflake.Node
 var InitErr error
 
+//初始化Id生成器
+//参数：@1当前节点ID
 func LoadSnowflakeNode(workerId int64) {
 	//fmt.Println(CurrWork.Generate().String())
 	SfNode, InitErr = snowflake.NewNode(workerId)

@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"github.com/CHYinYiHang/gocron/src/api"
 	"github.com/CHYinYiHang/gocron/src/api/serviceOk"
 	"github.com/gin-gonic/gin"
 )
@@ -23,6 +24,10 @@ func InitRouter(r *gin.Engine) *gin.Engine {
 		server.GET("/cat/status", serviceOk.Ok)
 	}
 
+	auth := r.Group("/auth")
+	{
+		auth.POST("/create/client", api.CreateClient)
+	}
 
 	return r
 }

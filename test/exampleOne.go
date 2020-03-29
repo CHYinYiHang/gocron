@@ -1,7 +1,7 @@
 package test
-
-import "fmt"
-
-func Test() {
-	fmt.Println("1111")
-}
+//
+//import "fmt"
+//
+//func Test() {
+//	fmt.Println("1111")
+//}
